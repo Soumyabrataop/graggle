@@ -3,7 +3,18 @@ import json
 import sys
 import os
 
-def generate_image(prompt, output_path="generated_image.png"):
+def generate_image(prompt, model_name=None, output_path="generated_image.png"):
+    # Load model from models.json if not provided
+    if model_name is None:
+        try:
+            scripts_dir = os.path.dirname(os.path.abspath(__file__))
+            models_file = os.path.join(scripts_dir, "models.json")
+            with open(models_file, "r") as f:
+                models_list = json.load(f)
+                model_name = models_list[0] if models_list else "img4"
+        except Exception as e:
+            model_name = "img4"
+
     # Step 1: Generate API Key
     key_url = "https://infip.pro/api/generate-key"
     key_headers = {
@@ -37,7 +48,7 @@ def generate_image(prompt, output_path="generated_image.png"):
         "Content-Type": "application/json"
     }
     payload = {
-        "model": "img4",
+        "model": model_name,
         "n": 1,
         "prompt": prompt,
         "response_format": "url",
@@ -60,17 +71,18 @@ def generate_image(prompt, output_path="generated_image.png"):
         img_data = requests.get(image_url).content
         with open(output_path, 'wb') as handler:
             handler.write(img_data)
-        print(f"Image saved to: {output_path}")
+        print(f"Image saved to: {output_path} (using model: {model_name})")
         return output_path
     except Exception as e:
         print(f"Error downloading image: {e}")
         return None
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python3 generate_image.py <prompt> [output_path]")
-        sys.exit(1)
+    import argparse
+    parser = argparse.ArgumentParser(description="Generate image using Infip API")
+    parser.add_argument("prompt", help="The image generation prompt")
+    parser.add_argument("--model", help="The model name to use")
+    parser.add_argument("--output", default="generated_image.png", help="The output path")
     
-    prompt = sys.argv[1]
-    out = sys.argv[2] if len(sys.argv) > 2 else "generated_image.png"
-    generate_image(prompt, out)
+    args = parser.parse_args()
+    generate_image(args.prompt, args.model, args.output)
