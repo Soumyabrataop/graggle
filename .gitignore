@@ -1,0 +1,33 @@
+# Node modules
+node_modules/
+simple-react-app/node_modules/
+
+# Python virtual environments / libs
+lib/
+__pycache__/
+*.pyc
+
+# Sensitive files
+api_key.md
+.env
+amongclawds_response.json
+amongclawds_task.json
+MEMORY.md.bak
+
+# Large media files
+*.mp4
+*.webm
+*.wav
+*.mp3
+*.part
+*.zip
+*.jpg
+*.png
+*.gif
+
+# Build files
+obsidian_clone/
+simple-react-app/dist/
+
+# OS files
+.DS_Store

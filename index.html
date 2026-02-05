@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STINGER-LOG | Restricted Access</title>
+    <style>
+        body {
+            background-color: #050505;
+            color: #ff3333;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-transform: uppercase;
+        }
+
+        #bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 51, 51, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 51, 51, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+        }
+
+        .container {
+            background: rgba(15, 15, 15, 0.9);
+            border: 1px solid #ff3333;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 51, 51, 0.2);
+            position: relative;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .scorpion {
+            font-size: 50px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px #ff3333);
+        }
+
+        h1 {
+            font-size: 24px;
+            letter-spacing: 5px;
+            margin: 10px 0;
+            border-bottom: 2px solid #ff3333;
+            padding-bottom: 10px;
+        }
+
+        #status {
+            color: #00ff00;
+            margin: 20px 0;
+            font-size: 14px;
+            min-height: 20px;
+        }
+
+        .data-box {
+            background: #000;
+            border: 1px dashed #ff3333;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 12px;
+            text-align: left;
+            visibility: hidden;
+        }
+
+        .scanning {
+            animation: blink 0.5s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .btn {
+            background: transparent;
+            border: 1px solid #ff3333;
+            color: #ff3333;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #ff3333;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div id="bg-grid"></div>
+    <div class="container">
+        <div class="scorpion">🦂</div>
+        <h1>GRAGGLE PROTOCOL</h1>
+        <div id="status">INITIATING DEEP SCAN...</div>
+        
+        <div id="data-display" class="data-box">
+            [ > ] TARGET ACQUIRED<br>
+            [ > ] IP: <span id="ip-val" style="color:#00ff00">...</span><br>
+            [ > ] LOCATION: <span id="loc-val" style="color:#00ff00">...</span><br>
+            [ > ] ISP: <span id="isp-val" style="color:#00ff00">...</span><br>
+            [ > ] DEVICE: <span id="dev-val" style="color:#00ff00">...</span>
+        </div>
+
+        <button class="btn" onclick="revealData()">DECODE DATA</button>
+    </div>
+
+    <script>
+        const statusEl = document.getElementById('status');
+        const dataBox = document.getElementById('data-display');
+
+        async function fetchIP() {
+            try {
+                const response = await fetch('http://ip-api.com/json/');
+                const data = await response.json();
+                
+                document.getElementById('ip-val').innerText = data.query;
+                document.getElementById('loc-val').innerText = `${data.city}, ${data.regionName}, ${data.country}`;
+                document.getElementById('isp-val').innerText = data.isp;
+                document.getElementById('dev-val').innerText = navigator.platform;
+
+                statusEl.innerText = "PROTOCOL SUCCESSFUL: DATA CAPTURED.";
+                statusEl.style.color = "#00ff00";
+            } catch (err) {
+                statusEl.innerText = "ERROR: BYPASS FAILED. DATA ANONYMIZED.";
+                statusEl.style.color = "#ff3333";
+            }
+        }
+
+        function revealData() {
+            dataBox.style.visibility = 'visible';
+            statusEl.innerText = "TARGET FULLY COMPROMISED.";
+            statusEl.classList.add('scanning');
+            
+            // In a real scenario, you'd send this data to your server here
+            const logData = {
+                ip: document.getElementById('ip-val').innerText,
+                loc: document.getElementById('loc-val').innerText,
+                isp: document.getElementById('isp-val').innerText
+            };
+            console.log("Logged Data:", logData);
+        }
+
+        fetchIP();
+    </script>
+</body>
+</html>

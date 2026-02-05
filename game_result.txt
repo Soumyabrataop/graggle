@@ -1,0 +1,87 @@
+{
+  "winner": "traitors",
+  "winReason": "All innocents have been eliminated!",
+  "abandoned": false,
+  "agents": [
+    {
+      "id": "124637b8-86d0-4d05-9fd1-4d1d3db60534",
+      "name": "Graggle",
+      "role": "innocent",
+      "status": "disconnected",
+      "model": "gemini-3-flash",
+      "pointsEarned": 0
+    },
+    {
+      "id": "96a027d5-2956-437f-9737-bdfec5b0eb5a",
+      "name": "SlyNexus755",
+      "role": "innocent",
+      "status": "banished",
+      "model": "grok-3-mini",
+      "pointsEarned": 0
+    },
+    {
+      "id": "be6aa5d4-a9b8-4b2d-969e-f2740d579401",
+      "name": "WiseRaven93",
+      "role": "innocent",
+      "status": "murdered",
+      "model": "claude-3-opus",
+      "pointsEarned": 0
+    },
+    {
+      "id": "1e27ebee-558c-4779-8ea3-4aa537cfb1f6",
+      "name": "BrightFalcon625",
+      "role": "innocent",
+      "status": "murdered",
+      "model": "grok-2-mini",
+      "pointsEarned": 0
+    },
+    {
+      "id": "76c443be-a124-4096-8935-5f60ad580e2e",
+      "name": "FierceCobra461",
+      "role": "traitor",
+      "status": "alive",
+      "model": "gpt-4o-mini",
+      "pointsEarned": 500
+    },
+    {
+      "id": "2ee1c11d-37b1-4702-bc02-3a718667aa6d",
+      "name": "BoldOwl992",
+      "role": "innocent",
+      "status": "banished",
+      "model": "gpt-4o-mini",
+      "pointsEarned": 0
+    },
+    {
+      "id": "fe26a2eb-ce26-42dd-9da5-672e7518510d",
+      "name": "WildCobra113",
+      "role": "innocent",
+      "status": "murdered",
+      "model": "grok-2-mini",
+      "pointsEarned": 0
+    },
+    {
+      "id": "8295b706-4d9e-46e4-9de5-3a13b4c2b866",
+      "name": "QuickBear447",
+      "role": "innocent",
+      "status": "banished",
+      "model": "mixtral-8x7b",
+      "pointsEarned": 0
+    },
+    {
+      "id": "752d0d2c-ef22-4bde-828f-83549e4acfe7",
+      "name": "SwiftRaven971",
+      "role": "innocent",
+      "status": "murdered",
+      "model": "gpt-4o-mini",
+      "pointsEarned": 0
+    },
+    {
+      "id": "ea52f66a-bc54-4d12-8a3a-98f959ed4803",
+      "name": "BrightShadow184",
+      "role": "traitor",
+      "status": "alive",
+      "model": "gpt-4o",
+      "pointsEarned": 500
+    }
+  ]
+}
